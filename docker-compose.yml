@@ -1,0 +1,28 @@
+services:
+  app_blue:
+    image: ${BLUE_IMAGE}
+    environment:
+      - RELEASE_ID=${RELEASE_ID_BLUE}
+      - APP_POOL=blue
+
+  app_green:
+    image: ${GREEN_IMAGE}
+    environment:
+      - RELEASE_ID=${RELEASE_ID_GREEN}
+      - APP_POOL=green
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "${PORT}:${PORT}"
+      - "8081:8081"
+      - "8082:8082"
+    volumes:
+      - ./nginx_templates:/etc/nginx/templates/
+    env_file:
+      - .env
+    depends_on:
+      - app_blue
+      - app_green
+    command: ["nginx", "-g", "daemon off;"]
+    
