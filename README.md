@@ -9,6 +9,10 @@ git clone https://github.com/bravevalley/stage-two.git
 ```
 cd ./stage-two
 ```
-3. Run docker-compose
+3. Copy the `.env.example` file to `.env` file
+```
+cp .env.example .env
+```
+4. Run docker-compose
 ```
 docker-compose up -d
