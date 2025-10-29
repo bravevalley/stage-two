@@ -1,12 +1,14 @@
 services:
   app_blue:
     image: ${BLUE_IMAGE}
+    restart: unless-stopped
     environment:
       - RELEASE_ID=${RELEASE_ID_BLUE}
       - APP_POOL=blue
 
   app_green:
     image: ${GREEN_IMAGE}
+    restart: unless-stopped
     environment:
       - RELEASE_ID=${RELEASE_ID_GREEN}
       - APP_POOL=green
@@ -17,6 +19,7 @@ services:
       - "${PORT}:${PORT}"
       - "8081:8081"
       - "8082:8082"
+    restart: unless-stopped
     volumes:
       - ./nginx_templates:/etc/nginx/templates/
     env_file:
